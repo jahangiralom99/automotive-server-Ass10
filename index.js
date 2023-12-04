@@ -1,14 +1,14 @@
-const express = require("express");
+const express = require('express');
 require("dotenv").config();
 const app = express();
-const cors = require("cors");
+var cors = require('cors')
 const port = process.env.PORT || 3000;
 
 // middleware configuration
 app.use(cors());
-app.use(express.json());
+app.use(json());
 
-const { MongoClient, ServerApiVersion, ObjectId } = require("mongodb");
+import { MongoClient, ServerApiVersion, ObjectId } from "mongodb";
 const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.USER_PASS}@cluster0.e9wqxpd.mongodb.net/?retryWrites=true&w=majority`;
 
 const client = new MongoClient(uri, {
