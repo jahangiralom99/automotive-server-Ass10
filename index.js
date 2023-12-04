@@ -73,11 +73,9 @@ async function run() {
     // addTO card Users;
     app.post('/carts', async (req, res) => {
       const newCart = req.body;
-      console.log(newCart);
       const result = await addCartCollection.insertOne(newCart);
       res.send(result);
     });
-
 
     // get users
     app.get('/carts', async (req, res) => {
@@ -85,6 +83,22 @@ async function run() {
       const query = await cursor.toArray();
       res.send(query);
     });
+
+     // for id carts
+     app.get("/carts/:id", async (req, res) => {
+      const id = req.params.id;
+      const query = { _id: new ObjectId(id) };
+      const result = await addCartCollection.findOne(query);
+      res.send(result);
+    })
+
+    // delete:
+    app.delete("/carts/:id", async (req, res) => {
+      const id = req.params.id;
+      const query = { _id: new ObjectId(id) };
+      const result = await addCartCollection.deleteOne(query);
+      res.send(result);
+    })
 
     await client.db("admin").command({ ping: 1 });
     console.log(
